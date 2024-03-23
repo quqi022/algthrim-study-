@@ -7,22 +7,48 @@
 
 using namespace std;
 
-
-
 int main() {
-    int n,t;
-    cin>>n>>t;
-    string str1;
-    cin>>str1;
-    while(t){
+    int t;
+    cin>>t;
+    while(t--){
+        int time=0;
+        int n;
+        cin>>n;
+        int a[n];
         for(int i=0;i<n;i++){
-            if(str1[i]=='B'&&str1[i+1]=='G'){
-                swap(str1[i],str1[i+1]);
-                i++;
+            cin>>a[i];
+        }
+        int k;
+        stable_sort(a,a+n);
+        if(n%2==0){
+            k=n/2-1;
+        }else{
+            k=n/2;
+        }
+        if(n==1){
+            time++;
+        }else if(n==2){
+            if(a[0]!=a[1]){
+                time++;
+            }else{
+                time++;
+                time++;
+            } 
+        }else{
+            if(a[k]==a[k+1]){
+                time++;
+                for(int i=k;i<n-1;i++){
+                    if(a[i]==a[i+1]){
+                        time++;
+                    }else{
+                        break;
+                    }
+                }
+            }else if(a[k]<a[k+1]){
+                time++;
             }
         }
-        t--;
+    cout<<time<<endl;
     }
-    cout<<str1<<endl;
     return 0;  
 }
